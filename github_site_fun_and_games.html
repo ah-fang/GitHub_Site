@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="github_site.css">
 </head>
 <header>
+    <h1>Games</h1>
     <nav>
         <a href = "github_site.html" class = "nav-link">Home</a>
         <a href = "github_site_poetry.html" class = "nav-link">Poetry</a>
@@ -12,9 +13,18 @@
 </header>
 <body>
     <section class = "games" id = "breakout">
-        <p style = color:white;>Breakout</p> <br>
-        <canvas id = "breakout-game" width = 480 height = 350></canvas>
-        <!-- <script>
+        <div class = "game-intro">
+            <h3 style = "color: white; text-align: center">Breakout!</h4>
+            <p style = "color:white">The classic game of Breakout! Move your paddle with 
+                the mouse or arrow keys to destroy the bricks, without letting the ball fall 
+                below the edge of the screen. <br>
+                Click anywhere on the page to begin.<br>
+                Click again to make it more interesting.
+            </p>
+        </div>
+        
+        <canvas id = "breakout-game" width = 380 height = 350></canvas>
+        <script>
             var canvas = document.getElementById("breakout-game");
             var ctx = canvas.getContext("2d");
             var x = canvas.width/2; //the ball movement
@@ -46,7 +56,7 @@
                 bricks[c][r] = { x: 0, y: 0, status: 1 };
                 }
             }
-            // document.addEventListener("click", draw); 
+            document.addEventListener("click", draw); 
             // ^^ this makes the game go faster every time you click
             document.addEventListener("keydown", keyDownHandler, false);
             document.addEventListener("keyup", keyUpHandler, false);
@@ -93,39 +103,39 @@
             } 
             function drawScore() {
                 ctx.font = "16px Arial";
-                ctx.fillStyle = "#0095DD";
+                ctx.fillStyle = "white";
                 ctx.fillText("Score: "+score, 8, 20);
             }
             function drawLives() {
                 ctx.font = "16px Arial";
-                ctx.fillStyle = "#0095DD";
+                ctx.fillStyle = "white";
                 ctx.fillText("Lives: "+lives, canvas.width-65, 20);
             }
             function drawBall() {
                 ctx.beginPath();
                 ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-                ctx.fillStyle = "#1138DE";
+                ctx.fillStyle = "white";
                 ctx.fill();
                 ctx.closePath();
             }
             function drawPaddle() {
                 ctx.beginPath();
                 ctx.rect(paddleX, canvas.height-paddleHeight, paddleWidth, paddleHeight);
-                ctx.fillStyle = "#3300AA";
+                ctx.fillStyle = "white";
                 ctx.fill();
                 ctx.closePath();
             }
             function drawBricks() {
-                for(var c=0; c<brickColumnCount; c++) {
+                for(var c=0; c<brickColumnCount; c++) { 
                     for(var r=0; r<brickRowCount; r++) {
                         if (bricks[c][r].status ==1){
                         var brickX = (c*(brickWidth+brickPadding))+brickOffsetLeft;
                         var brickY = (r*(brickHeight+brickPadding))+brickOffsetTop;
                         bricks[c][r].x = brickX;
-                        bricks[c][r].y = brickY;
+                        bricks[c][r].y = brickY; 
                         ctx.beginPath();
                         ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                        ctx.fillStyle = "#9955FF";
+                        ctx.fillStyle = "orange";
                         ctx.fill();
                         ctx.closePath();
                         }
@@ -184,13 +194,13 @@
                 y += dy; 
                 requestAnimationFrame(draw);
             }
-            draw(); 
-        </script> -->
+            // draw(); 
+        </script>
     </section>
-    <section>
-        <h4>CYOA</h4>
+    <section class = "cyoa-box">
+        <h4>Choose Your Own Adventure</h4>
         <a href = "github_site_cyoa.html">To the Adventure</a>
     </section>
-    <p>Some text</p>
+    <br>
 </body>
-<footer>Text</footer>
+<footer>secret text...</footer>
