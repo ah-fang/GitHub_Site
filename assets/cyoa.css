@@ -1,0 +1,47 @@
+
+* {
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+div {
+    border: 4px double;
+    padding: 15px;
+}
+
+h3 {
+    text-align: center;
+}
+
+button {
+    border-radius: 5px;
+    margin: 5px;
+}
+
+select {
+    display: inline-block;
+    margin: 5px;
+}
+
+#start {
+    background-color:blanchedalmond;
+}
+
+#storage {
+    background-color: lightpink;
+}
+
+#dining {
+    background-color: aqua;
+}
+
+#diningRight {
+    background-color: aquamarine;
+}
+
+#kitchen {
+    background-color: tomato;
+}
+
+#freezer {
+    background-color: darkgreen;
+}

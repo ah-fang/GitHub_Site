@@ -121,8 +121,9 @@ function start() {
 }
 
 function moveF() {
-    if (currentRm === "storage") {
-        currentRm = "dining"; 
+    if (currentRm === rooms[1]) {
+        currentRm = rooms[2];
+        newDiv.id = currentRm; 
         document.getElementById("choices").appendChild(opt6);
         document.getElementById("choices").appendChild(opt7);
         document.getElementById("choices").appendChild(opt2);
@@ -139,6 +140,7 @@ function moveF() {
     //add the conditionals for when diningV === true
     if (currentRm === rooms[4]) {
         currentRm = rooms[5];
+        newDiv.id = currentRm; 
         if (lightsOn === false) {
             title.textContent = "Freezer Dark.";
             flavText.textContent = "Freezer DarkPath flavor text.";
@@ -154,6 +156,7 @@ function moveF() {
 function moveB() {
     if (currentRm === rooms[5]) {
         currentRm = rooms[4];
+        newDiv.id = currentRm; 
         document.getElementById("choices").appendChild(opt2);
         if (lightsOn === false) {
             title.textContent = "Kitchen Dark."
@@ -164,9 +167,39 @@ function moveB() {
             flavText.textContent = "Kitchen LightPath flavor text.";
         }
     }
+    if (currentRm === rooms[3]) {
+        currentRm = rooms[2];
+        newDiv.id = currentRm; 
+        document.getElementById("choices").appendChild(opt2);
+        document.getElementById("choices").appendChild(opt6);
+        document.getElementById("choices").appendChild(opt7);
+        if (lightsOn === false) {
+            title.textContent = "Dining Dark."
+            flavText.textContent = "Dining Darkpath flavor text."
+        }
+        else {
+            title.textContent = "Dining Light";
+            flavText.textContent = "Dining LightPath flavor text.";
+        }
+    }
     if (currentRm === rooms[2]) {
         currentRm = rooms[1];
+        newDiv.id = currentRm; 
         document.getElementById("choices").appendChild(opt1);
+        if (lightsOn === false) {
+            title.textContent = "Storage Dark."
+            flavText.textContent = "Storage Darkpath flavor text."
+        }
+        else {
+            title.textContent = "Storage Light";
+            flavText.textContent = "storage LightPath flavor text.";
+            document.getElementById("choices").appendChild(opt5);
+        }
+        if (storageSearched === false) {
+            document.getElementById("choices").appendChild(opt4);
+        }
+    }
+    if (currentRm === rooms[1]) {
         if (lightsOn === false) {
             title.textContent = "Storage Dark."
             flavText.textContent = "Storage Darkpath flavor text."
@@ -237,8 +270,9 @@ function backDr() {
 function moveR() {
     //thing
     currentRm = rooms[3];
-    document.getElementById("choices").removeChild(opt6);
-    document.getElementById("choices").removeChild(opt2);
+    newDiv.id = currentRm; 
+    document.getElementById("choices").appendChild(opt8);
+    document.getElementById("choices").appendChild(opt2);
     if (lightsOn === false) {
         title.textContent = "DiningRight Dark";
         flavText.textContent = "DiningRight Dark flavor text.";
@@ -253,6 +287,7 @@ function moveR() {
 function moveL() { 
     if (currentRm === rooms[2]) {
         currentRm = rooms[4];
+        newDiv.id = currentRm; 
         document.getElementById("choices").removeChild(opt6);
         if (lightsOn === false) {
             title.textContent = "kitchen Dark";
@@ -266,6 +301,7 @@ function moveL() {
     }
     else if (currentRm === rooms[4]) { // add in choices about opening/closing door
         currentRm === rooms[5];
+        newDiv.id = currentRm; 
         if (lightsOn === false) {
             title.textContent = "freezer Dark";
             flavText.textContent = "freezer dark flavor text.";
@@ -278,6 +314,7 @@ function moveL() {
     }
     else {
         currentRm = rooms[2];
+        newDiv.id = currentRm; 
         document.getElementById("choices").appendChild(opt6);
         document.getElementById("choices").appendChild(opt2);
         if (lightsOn === false) {
@@ -315,7 +352,7 @@ function examine() {
     //thing
     if (possumGone === false) {
         title.textContent = "Uh oh.";
-        flavText.textContent = "You've attracted it's attention."; 
+        flavText.textContent = "You've attracted its attention."; 
         //give option to move forward, back, or use item
     }
 }
@@ -385,5 +422,6 @@ goBtn.addEventListener("click", () => {
         start();
         console.log("I ran the start function");
     }
-    console.log(currentRm); 
+    console.log(currentRm);
+    console.log(newDiv.id); 
 });
