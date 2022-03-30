@@ -22,7 +22,19 @@ var possumGone = false;
 //then arrays
 var rooms = ["start", "storage", "dining", "diningRight", "kitchen", "freezer"] //will be set as div id
 var items = ["Key #1", "Key #2", "Key #3", "Hammer", "Iceburgs"];
-var options = ["choose an option...", "move forward", "move backward", "use an item", "search the room", "try the back door", "move right", "move left", "attack", "examine", "let's go", "close the door", "leave it open"];
+var options = ["choose an option...", 
+                "move forward", 
+                "move backward", 
+                "use an item", 
+                "search the room", 
+                "try the back door", 
+                "move right", 
+                "move left", 
+                "attack", 
+                "examine", 
+                "let's go", 
+                "close the door", 
+                "leave it open"];
 
 var currentRm = rooms[0];
 
@@ -53,7 +65,7 @@ var itemText = document.createElement("p");
 itemText.textContent = " ";
 document.getElementById("itemSec").appendChild(itemText);
 
-//create all options but do not append to select until applicable
+//All options exist but are not appended to select until applicable
 var opt0 = document.createElement("option");
 opt0.textContent = options[0];
 document.getElementById("choices").appendChild(opt0);//this one always applicable ("choose an option...")
@@ -77,7 +89,7 @@ var opt9 = document.createElement("option");
 opt9.textContent = options[9];
 var opt10 = document.createElement("option");
 opt10.textContent = options[10];
-document.getElementById("choices").appendChild(opt10); 
+document.getElementById("choices").appendChild(opt10); //"let's go" appended to start game
 var opt11 = document.createElement("option");
 opt11.textContent = options[11];
 var opt12 = document.createElement("option"); 
@@ -92,14 +104,8 @@ var key3 = document.createElement("option");
 key3.textContent = items[2];
 var hammer = document.createElement("option");
 H.textContent = items[3];
-var I = document.createElement("option");
-I.textContent = items[4];
-
-//for(var i=0; i<options.length; i++) {
-    // if(options[i].innerHTML == 'optionName' || options[i].innerHTML == 'optionName') {
-    //     theSelect.removeChild(options[i]);
-    //     i--; // options have now less element, then decrease i
-    // }
+var iceBurgs = document.createElement("option");
+iceBurgs.textContent = items[4];
 
 //function to clear the options from select box except first "choose an option..."
 function clearDiv() {
@@ -237,22 +243,20 @@ function moveB() {
 }
 
 function useItem() {
-    //fill in by room
-    if (currentRm === "storage" || currentRm === "kitchen") {
-        if(K1) {
-            document.getElementById("choices").appendChild(key1);
-        }
-        if(K2) {
-            document.getElementById("choices").appendChild(key2);
-        }
-        if(K3) {
-            document.getElementById("choices").appendChild(key3);
-        }
+    if(K1) {
+         document.getElementById("choices").appendChild(key1);
     }
-    if(currentRm === "kitchen") {
-        if(H) {
-            document.getElementById("choices").appendChild(hammer);
-        }
+    if(K2) {
+        document.getElementById("choices").appendChild(key2);
+    }
+    if(K3) {
+        document.getElementById("choices").appendChild(key3);
+    }
+    if(H) {
+        document.getElementById("choices").appendChild(hammer);
+    }
+    if(I) {
+        document.getElementById("choices").appendChild(iceBurgs);
     }
 }
 
@@ -367,19 +371,17 @@ function moveL() {
 }
 
 function attack() {
-    //thing
     if (currentRm === "kitchen") {
         possumGone = true;
         title.textContent = "You fight the possum.";
         flavText.textContent = "Possum fight description.";
     }
     if (currentRm === "diningRight") {
-        if (H) {
-
-        }
-        else {
-            title.textContent = "You attack the window with the Hammer.";
-            flavText.textContent = "WindowBreak.";
+        title.textContent = "You attack the window with your bare hands."
+        flavText.textContent = "This hurts your hands. The window seems unaffected."
+        document.getElementById("choices").appendChild(opt2);
+        if (K1 || K2 || K3 || H || I) {
+            document.getElementById("choices").appendChild(opt3);
         }
         // add win condition text
     }
@@ -397,10 +399,12 @@ function examine() {
 function useK1() {
     title.textContent = "You try the first key.";
     flavText.textContent = "It has no effect.";
+//add room conditionals
+    document.getElementById("choices").appendChild(opt2);
 }
 
 function useK2() {
-    if (currentRm === "storage"){
+    if (currentRm === "storage") {
         title.textContent = "You try the second key.";
         flavText.textContent = "It has no effect.";
     }
@@ -410,6 +414,44 @@ function useK2() {
     }
 }
 
+function useK3() {
+    if (currentRm === "storage") {
+        title.textContent = "You try the third key.";
+        flavText.textContent = "It slots into the lock, and the handle turns. You step through and find yourself outside.";
+        //add some win text
+    }
+    if (currentRm === "kitchen") {
+        title.textContent = "You try the third key.";
+        flavText.textContent = "It has no effect.";
+    }
+}
+
+function useH() {
+    if (currentRm === "storage") {
+        title.textContent = ".";
+        flavText.textContent = ".";
+    }
+    if (currentRm === "kitchen") {
+        title.textContent = ".";
+        flavText.textContent = ".";
+    }
+}
+
+function useI() {
+    if (currentRm === "diningRight") {
+        title.textContent = "You swing the Iced Bergs at the window.";
+        flavText.textContent = ".";
+    }
+    else {
+        title.textContent = "You swing the Iced Bergs around.";
+        flavText.textContent = "It doesn't seem to help anything. At least you tried.";
+        document.getElementById("choices").appendChild(opt2);
+    }
+}
+// else {
+//     title.textContent = "You attack the window with the Hammer.";
+//     flavText.textContent = "WindowBreak.";
+// }
 function closeDoor() {
     title.textContent = "BANG!";
     flavText.textContent = "LockedIn Ending. Game Over. Select Let's Go to restart.";
@@ -437,8 +479,8 @@ goBtn.addEventListener("click", () => {
         console.log("I moved back");
     }
     if (s.value === options[3]) {
-        clearDiv();
         useItem();
+        //no ClearDiv here
         console.log("Let's use an item, shall we?");
     }
     if (s.value === options[4]) {
@@ -487,14 +529,17 @@ goBtn.addEventListener("click", () => {
         console.log("I like the breeze");
     }
     if (s.value === items[0]) {
+        clearDiv();
         useK1();
         console.log("I tried the first key");
     }
     if (s.value === items[1]) {
+        clearDiv();
         useK2();
         console.log("I tried the second key");
     }
     if (s.value === items[2]) {
+        clearDiv();
         useK3();
         console.log("I tried the third key");
     }

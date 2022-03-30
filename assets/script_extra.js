@@ -1,23 +1,23 @@
 //items for the array. Set to false until they are picked up
-var K1 = false;
-var K2 = false;
-var K3 = false;
-var H = false;
-var I = false;
+// var K1 = false;
+// var K2 = false;
+// var K3 = false;
+// var H = false;
+// var I = false;
 
-//room booleans. True if they have been visited before
-var storage = false;
-var dining = false;
-var diningRight = false;
-var kitchen = false;
-var freezer = false;
+// //room booleans. True if they have been visited before
+// var storage = false;
+// var dining = false;
+// var diningRight = false;
+// var kitchen = false;
+// var freezer = false;
 
-//actions tracker
-var lightsOn = false;
-var storageSearched = false;
-var kitchenSearched = false;
-var freezerSearched = false;
-var possumGone = false;
+// //actions tracker
+// var lightsOn = false;
+// var storageSearched = false;
+// var kitchenSearched = false;
+// var freezerSearched = false;
+// var possumGone = false;
 
 class Item {
     constructor(nam) {
@@ -54,6 +54,12 @@ var kitText = ["You can't see anything, but you can certainly smell this room. I
                 "l"];
 var frezText = [];
 
+//for(var i=0; i<options.length; i++) {
+    // if(options[i].innerHTML == 'optionName' || options[i].innerHTML == 'optionName') {
+    //     theSelect.removeChild(options[i]);
+    //     i--; // options have now less element, then decrease i
+    // }
+    
 //location tracker
 var currentRm = room[0];
 
