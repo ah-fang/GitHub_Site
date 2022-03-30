@@ -5,6 +5,8 @@
 div {
     border: 4px double;
     padding: 15px;
+    max-width: 600px; 
+    margin: 50px auto; 
 }
 
 h3 {

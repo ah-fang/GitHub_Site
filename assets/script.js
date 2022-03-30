@@ -243,6 +243,8 @@ function moveB() {
 }
 
 function useItem() {
+    title.textContent = "Use an Item";
+    flavText.textContent = "What will you use?";
     if(K1) {
          document.getElementById("choices").appendChild(key1);
     }
