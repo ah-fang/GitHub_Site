@@ -103,7 +103,7 @@ key2.textContent = items[1];
 var key3 = document.createElement("option");
 key3.textContent = items[2];
 var hammer = document.createElement("option");
-H.textContent = items[3];
+hammer.textContent = items[3];
 var iceBurgs = document.createElement("option");
 iceBurgs.textContent = items[4];
 
@@ -116,6 +116,28 @@ function clearDiv() {
     itemText.textContent = " ";
 }
 
+function clearItems() {
+    if (s.contains(key1)) {
+        key1.parentNode.removeChild(key1);
+    }
+    if (s.contains(key2)) {
+        key2.parentNode.removeChild(key2);
+    }
+    if (s.contains(key3)) {
+        key3.parentNode.removeChild(key3);
+    }
+    if (s.contains(hammer)) {
+        hammer.parentNode.removeChild(hammer);
+    }
+    if (s.contains(iceBurgs)) {
+        iceBurgs.parentNode.removeChild(iceBurgs);
+    }
+    // document.getElementById("choices").removeChild(key1);
+    // document.getElementById("choices").removeChild(key2); 
+    // document.getElementById("choices").removeChild(key3);
+    // document.getElementById("choices").removeChild(hammer);
+    // document.getElementById("choices").removeChild(iceBurgs); 
+}
 //functions attached to options 
 function start() {
     currentRm = rooms[1];
@@ -283,6 +305,10 @@ function search() {
         H = true;
         kitchenSearched = true;
         //fill secret div with item infotext
+        itemTitle = "Items Discovered: Key #2 and Hammer"
+        itemText = "You swipe a silver key off the counter, along with a hammer with spikes on one side. You think it's for meat."
+        document.getElementById("choices").appendChild(opt2);
+        document.getElementById("choices").appendChild(opt7);
     }
     if (currentRm === rooms[5]) {
         title.textContent = "freezer searched";
@@ -296,15 +322,19 @@ function search() {
 function backDr() {
     title.textContent = "storage backdoor";
     flavText.textContent = "The back door is locked.";
-    if (K1 === true || K2 === true || K3 === true) {
+    itemTitle.textContent = " ";
+    itemText.textContent = " ";
+    document.getElementById("choices").removeChild(opt5);
+    document.getElementById("choices").appendChild(opt1);
+    if (K1 || K2|| K3) {
         //give option to useItem
         document.getElementById("choices").appendChild(opt3);
-        document.getElementById("choices").appendChild(opt5);
+        // document.getElementById("choices").appendChild(opt5);
     }
-    else {
-        //only option is to leave the room "Go forward"
-        document.getElementById("choices").appendChild(opt5);
-    }
+    // else {
+    //     //only option is to leave the room "Go forward"
+    //     document.getElementById("choices").appendChild(opt1);
+    // }
 }
 
 function moveR() {
@@ -439,7 +469,7 @@ function useH() {
     }
 }
 
-function useI() {
+function useIce() {
     if (currentRm === "diningRight") {
         title.textContent = "You swing the Iced Bergs at the window.";
         flavText.textContent = ".";
@@ -491,7 +521,6 @@ goBtn.addEventListener("click", () => {
         console.log("I cased the place");
     }
     if (s.value === options[5]) {
-        clearDiv();
         backDr();
         console.log("I'm checking in the back");
     }
@@ -531,18 +560,28 @@ goBtn.addEventListener("click", () => {
         console.log("I like the breeze");
     }
     if (s.value === items[0]) {
-        clearDiv();
+        clearItems();
         useK1();
         console.log("I tried the first key");
     }
     if (s.value === items[1]) {
-        clearDiv();
+        clearItems();
         useK2();
         console.log("I tried the second key");
     }
     if (s.value === items[2]) {
-        clearDiv();
+        clearItems();
         useK3();
+        console.log("I tried the third key");
+    }
+    if (s.value === items[3]) {
+        clearItems();
+        useH();
+        console.log("I tried the hammer");
+    }
+    if (s.value === items[4]) {
+        clearItems();
+        useIce();
         console.log("I tried the third key");
     }
     console.log(currentRm);
