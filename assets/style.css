@@ -11,28 +11,22 @@ div {
 
 h3 {
     text-align: center;
-    font-size: 72px;
-}
-
-#flavText {
-    font-size: 36px;
 }
 
 button {
     border-radius: 5px;
     margin: 5px;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 select {
     display: inline-block;
+    border: thin solid black;
     margin: 5px;
+    font-size: 24px;
+    margin: 0 3% 0 25%;
 }
-/* 
-section {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-} */
 
 img {
     width: 40px;
@@ -63,12 +57,19 @@ img {
 #freezer {
     background-color: darkgreen;
 }
-
-@media only screen and(max-width: 400px) {
+/* media queries */
+@media only screen and (max-width: 600px) {
     h3 {
-        font-size: 72px;
+        font-size: 32px;
     }
     p {
-        font-size: 24px;
+      font-size: 24px;
     }
-}
+  }
+  @media only screen and (max-width: 400px) {
+
+    select, button {
+        display: block;
+        margin: 20px auto;
+    }
+  }
