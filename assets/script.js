@@ -45,7 +45,9 @@ document.getElementById("js-version").appendChild(newDiv);
 var title = document.createElement("h3");
 title.textContent = "hello";
 document.getElementById("start").appendChild(title);
-var flavText = document.createTextNode("Welcome to the Choose Your Own Adventure game! When you're ready to start, select 'let's go' and hit the Go button.");
+var flavText = document.createElement("p")
+flavText.textContent="Welcome to the Choose Your Own Adventure game! When you're ready to start, select 'let's go' and hit the Go button.";
+flavText.id = "flavText";
 newDiv.appendChild(flavText);  
 var s = document.createElement("select");
 s.id = "choices";
