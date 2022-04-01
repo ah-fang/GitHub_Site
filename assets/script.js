@@ -54,6 +54,35 @@ var goBtn = document.createElement("button");
 goBtn.textContent = "Go";
 newDiv.appendChild(goBtn);  
 
+//inventory at bottom of div. Icons will appear if/when player acquires items.
+var inventory = document.createElement("section");
+document.getElementById("start").appendChild(inventory);
+//item 1 - car key
+var imgOne = document.createElement("img");
+imgOne.src = "assets/icons/key1.png";
+imgOne.alt = "Key#1";
+document.getElementById("start").appendChild(imgOne);
+//item 2 - kitchen key
+var imgTwo = document.createElement("img");
+imgTwo.src = "assets/icons/key2.png";
+imgTwo.alt = "Key#2";
+document.getElementById("start").appendChild(imgTwo);
+//item 3 - freezer key
+var imgThree = document.createElement("img");
+imgThree.src = "assets/icons/key3.png";
+imgThree.alt = "Key#3";
+document.getElementById("start").appendChild(imgThree);
+//item 4 - hammer
+var imgFour = document.createElement("img");
+imgFour.src = "assets/icons/hammer.png";
+imgFour.alt = "Hammer";
+document.getElementById("start").appendChild(imgFour);
+//item 5 - Iceburgs
+var imgFive = document.createElement("img");
+imgFive.src = "assets/icons/iceburgs.png";
+imgFive.alt = "iceburgs";
+document.getElementById("start").appendChild(imgFive);
+
 //section that only appears with text when items are obtained. otherwise empty
 var itemSec = document.createElement("section");
 itemSec.id = "itemSec";
@@ -132,11 +161,6 @@ function clearItems() {
     if (s.contains(iceBurgs)) {
         iceBurgs.parentNode.removeChild(iceBurgs);
     }
-    // document.getElementById("choices").removeChild(key1);
-    // document.getElementById("choices").removeChild(key2); 
-    // document.getElementById("choices").removeChild(key3);
-    // document.getElementById("choices").removeChild(hammer);
-    // document.getElementById("choices").removeChild(iceBurgs); 
 }
 //functions attached to options 
 function start() {
@@ -289,6 +313,7 @@ function search() {
         title.textContent = "You search the room.";
         flavText.textContent = "You feel around blindly until you find a wall. Searching along it reveals a switch. You throw the switch and the lights flick on, revealing a small storage room. There is a door in front of you and a door behind. There is also a key on the floor, which you pick up.";
         K1 = true;
+        imgOne.style.display = "inline";
         storageSearched = true;
         lightsOn = true;
         console.log("First key: " + K1)
@@ -302,11 +327,13 @@ function search() {
         title.textContent = "kitchen searched";
         flavText.textContent = "kitchen searched flavor text.";
         K2 = true;
+        imgTwo.style.display = "inline";
         H = true;
+        imgFour.style.display = "inline";
         kitchenSearched = true;
         //fill secret div with item infotext
-        itemTitle = "Items Discovered: Key #2 and Hammer"
-        itemText = "You swipe a silver key off the counter, along with a hammer with spikes on one side. You think it's for meat."
+        itemTitle.textContent = "Items Discovered: Key #2 and Hammer"
+        itemText.textContent = "You swipe a silver key off the counter, along with a hammer with spikes on one side. You think it's for meat."
         document.getElementById("choices").appendChild(opt2);
         document.getElementById("choices").appendChild(opt7);
     }
@@ -314,8 +341,11 @@ function search() {
         title.textContent = "freezer searched";
         flavText.textContent = "freezer searched flavor text.";
         K3 = true;
+        imgThree.style.display = "inline";
         storageSearched = true;
         //fill secret div with item infotext
+        //add options from freezer
+        document.getElementById("choices").appendChild(opt2);
     }
 }
 
