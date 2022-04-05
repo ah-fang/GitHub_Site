@@ -64,12 +64,12 @@ var imgOne = document.createElement("img");
 imgOne.src = "assets/icons/key1.png";
 imgOne.alt = "Key#1";
 document.getElementById("start").appendChild(imgOne);
-//item 2 - kitchen key
+//item 2 - kitchen key (unlocks soda machine)
 var imgTwo = document.createElement("img");
 imgTwo.src = "assets/icons/key2.png";
 imgTwo.alt = "Key#2";
 document.getElementById("start").appendChild(imgTwo);
-//item 3 - freezer key
+//item 3 - freezer key (unlocks storage back door)
 var imgThree = document.createElement("img");
 imgThree.src = "assets/icons/key3.png";
 imgThree.alt = "Key#3";
@@ -163,6 +163,9 @@ function clearItems() {
     if (s.contains(iceBurgs)) {
         iceBurgs.parentNode.removeChild(iceBurgs);
     }
+}
+function clearIcons() {
+    document.querySelector("img").style.display = "none";
 }
 //functions attached to options 
 function start() {
@@ -286,7 +289,7 @@ function moveB() {
         }
     }
     else {
-        console.log("else text");
+        console.log("MoveB no ifs triggered");
     }
 }
 
@@ -410,7 +413,6 @@ function moveL() {
         if (!lightsOn) {
             title.textContent = "freezer Dark";
             flavText.textContent = "freezer dark flavor text.";
-            //add options for leave door open or closed
         }
         else {
             title.textContent = "freezer Light";
@@ -504,7 +506,8 @@ function useH() {
 function useIce() {
     if (currentRm === "diningRight") {
         title.textContent = "You swing the Iced Bergs at the window.";
-        flavText.textContent = ".";
+        flavText.textContent = "CRASH! The section of window you struck gives way, spraying glass like the world's worst pinata. Cold night air rushes in, and you are able to climb through to the world outside.";
+        itemTitle.textContent = "Congratulations! You have successfully escaped. A winner is you :)"
     }
     else {
         title.textContent = "You swing the Iced Bergs around.";
@@ -512,10 +515,7 @@ function useIce() {
         document.getElementById("choices").appendChild(opt2);
     }
 }
-// else {
-//     title.textContent = "You attack the window with the Hammer.";
-//     flavText.textContent = "WindowBreak.";
-// }
+
 function closeDoor() {
     title.textContent = "BANG!";
     flavText.textContent = "LockedIn Ending. Game Over. Select Let's Go to restart.";
@@ -527,9 +527,18 @@ function doorOpen() {
     flavText.textContent = "Some of the cold gets out, but otherwise nothing happens.";
     document.getElementById("choices").appendChild(opt2);
     if(lightsOn) {
+        flavText.textContent = "Some of the cold gets out, but otherwise nothing happens.";
         document.getElementById("choices").appendChild(opt4);
     }
+    else {
+        flavText.textContent = "You leave the door open. The shuffling continues. Unnerved, you reach forward in the dark, grabbing the first thing you can reach. It's extremely cold to the touch.";
+        imgFive.style.display = "inline";
+        I = true;
+        itemTitle.textContent = "Item Discovered: Iced Burgs";
+        itemText.textContent = "A stack of hamburger patties, frozer into a solid cylinder of beef.";
+    }
 }
+
 //the Go button's destinations 
 goBtn.addEventListener("click", () => {
     if (s.value === options[1]) {
@@ -578,6 +587,7 @@ goBtn.addEventListener("click", () => {
     }
     if (s.value === options[10]) {
         clearDiv();
+        clearIcons();
         start();
         console.log("I ran the start function");
     }
