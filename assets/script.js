@@ -205,36 +205,35 @@ function start() {
 }
 
 function moveF() {
-    if (currentRm === rooms[1]) {
-        currentRm = rooms[2];
-        newDiv.id = currentRm; 
-        document.getElementById("choices").appendChild(opt6);
-        document.getElementById("choices").appendChild(opt7);
-        document.getElementById("choices").appendChild(opt2);
-        if (!lightsOn) {
-            title.textContent = "You enter the next room.";
-            flavText.textContent = dineText[0];
-        }
-        else {            
-            title.textContent = "Dining Room";
-            flavText.textContent = dineText[2];
-            opt1.textContent = "do something different";
-        }      
+    currentRm = rooms[2];
+    newDiv.id = currentRm; 
+    document.getElementById("choices").appendChild(opt6);
+    document.getElementById("choices").appendChild(opt7);
+    document.getElementById("choices").appendChild(opt2);
+     if (!lightsOn) {
+        title.textContent = "You enter the next room.";
+        flavText.textContent = dineText[0];
     }
+    else {            
+        title.textContent = "Dining Room";
+        flavText.textContent = dineText[2];
+        opt1.textContent = "do something different";
+    }      
+
     //add the conditionals for when diningV === true
-    if (currentRm === rooms[4]) {
-        currentRm = rooms[5];
-        newDiv.id = currentRm; 
-        if (!lightsOn) {
-            title.textContent = "Freezer Dark.";
-            flavText.textContent = frezText[0];
-            //grant Iceburgs automatically
-        }
-        else  {
-            title.textContent = "Freezer Light";
-            flavText.textContent = frezText[2];
-        }     
-    }
+
+    // else if (currentRm === rooms[4]) {
+    //     currentRm = rooms[5];
+    //     newDiv.id = currentRm; 
+    //     if (!lightsOn) {
+    //         title.textContent = "Freezer Dark.";
+    //         flavText.textContent = frezText[0];
+    //     }
+    //     else  {
+    //         title.textContent = "Freezer Light";
+    //         flavText.textContent = frezText[2];
+    //     }     
+    // }
 }
 
 function moveB() {
@@ -355,7 +354,7 @@ function search() {
     }
     if (currentRm === rooms[5]) {
         title.textContent = "freezer searched";
-        flavText.textContent = "freezer searched flavor text.";
+        flavText.textContent = "Before you can plunge your hands into any ice buckets, a glint catches your eye. There is a key on the floor!\nYou're pretty sure that the circumstances leading to this discovery mean this key is legally yours.";
         K3 = true;
         imgThree.style.display = "inline";
         storageSearched = true;
@@ -402,11 +401,11 @@ function moveL() {
         document.getElementById("choices").appendChild(opt7); 
         if (!lightsOn) {
             title.textContent = "kitchen Dark";
-            flavText.textContent = "kitchen dark flavor text.";
+            flavText.textContent = kitText[0];
         }
         else {
             title.textContent = "Kitchen Light";
-            flavText.textContent = "Kitchen light flavor text.";
+            flavText.textContent = kitText[2];
             document.getElementById("choices").appendChild(opt4);
         }//add check for kitchenV boolean   
     }
@@ -418,11 +417,11 @@ function moveL() {
         document.getElementById("choices").appendChild(opt12);        
         if (!lightsOn) {
             title.textContent = "freezer Dark";
-            flavText.textContent = "freezer dark flavor text.";
+            flavText.textContent = frezText[0];
         }
         else {
             title.textContent = "freezer Light";
-            flavText.textContent = "freezer light flavor text.";
+            flavText.textContent = frezText[2];
             document.getElementById("choices").appendChild(opt4);
         }//add check for kitchenV boolean   
     }
@@ -433,11 +432,11 @@ function moveL() {
         document.getElementById("choices").appendChild(opt2);
         if (!lightsOn) {
             title.textContent = "Dining Dark";
-            flavText.textContent = "Dining dark flavor text.";
+            flavText.textContent = dineText[0];
         }
         else {
             title.textContent = "Dining Light";
-            flavText.textContent = "Dining light flavor text.";
+            flavText.textContent = dineText[2];
         }//add check for kitchenV boolean   
     }
 }
