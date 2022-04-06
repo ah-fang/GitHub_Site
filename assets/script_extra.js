@@ -1,24 +1,3 @@
-//items for the array. Set to false until they are picked up
-// var K1 = false;
-// var K2 = false;
-// var K3 = false;
-// var H = false;
-// var I = false;
-
-// //room booleans. True if they have been visited before
-// var storage = false;
-// var dining = false;
-// var diningRight = false;
-// var kitchen = false;
-// var freezer = false;
-
-// //actions tracker
-// var lightsOn = false;
-// var storageSearched = false;
-// var kitchenSearched = false;
-// var freezerSearched = false;
-// var possumGone = false;
-
 class Item {
     constructor(nam) {
         this.name = nam;
@@ -32,17 +11,15 @@ var Items = [
     Hammer = new Item,
     Iceburgs = new Item
 ]; 
-//array of room names.
-var room = ["start", "storage", "dining", "diningRight", "kitchen", "freezer"];
 
-//array of room flavor text
-//note: flavor text is stored in this order: darkUnvisited, darkVisited, lightUnvisited, lightVisited.
+//array of room flavor text. Note: flavor text is stored in this order: darkUnvisited, darkVisited, lightUnvisited, lightVisited.
 var starText = "You are in a room. No doubt you achieved something, maybe not to get here but at some point in your life, so congratulations are in order. The lights, however, seem to be out of order. You can't see a thing.";
 //exception for storage room: there is no unvisited dark option, since you start the game here.
 var stowText = ["Back in the first room. Hmm. Still dark.",
                 "You are in a small storage room. There is a door in front of you and one behind.",
                 "Back in the storage room. Hey, is that mop new? No, never mind, that was there before."];
 var dineText = [ "It's hard to tell, but this room feels larger than the one you were in before. With your hand on the left wall, you know there is a doorway there. To your right is dark empty space.", 
+                "Back in the larger room.",
                 "You are in what looks like the dining area of a quick-service restaurant. You can see out through the windows that it is dark outside.",
                 "Back in the main dining area."];
 var dinRText = ["You stub your toe on a chair on the way over. Don't worry, that's very rarely fatal. Anyway, you're now at the edge of the room. Stretching out your hands, you feel cold glass. One of the panes is ridged and uneven.",
@@ -50,9 +27,12 @@ var dinRText = ["You stub your toe on a chair on the way over. Don't worry, that
                 "You return triumphantly to this part of the room. A round of applause does not follow, but you're welcome to imagine it does.\nRecap: Some tables and chairs. Window. Crack."];
 var kitText = ["You can't see anything, but you can certainly smell this room. It's vaguely like a room that's been continuously coated in french fry grease for several years. There is a faint shuffling noise deeper into the room.",
                 "Back in the stinky room. You can go back or left.",
-                "You enter what looks like a kitchen. THere ",
-                "l"];
-var frezText = [];
+                "You enter what looks like a kitchen. There is a counter running along one side, a soda machine in the corner, and a heavy metal door hanging ajar on the left.\nYou can hear a strange shuffling coming from a garbage can against the wall. Looking over, you can see the can shaking like there is something inside.",
+                "It really smells like french fries in here, yet none are in sight. Tease."];
+var frezText = ["It's extremely chilly in here. You must have forgotten your parka. And your night-vision goggles.", 
+                "Here again. Leaving the door open helped with the chill.", 
+                "You find yourself in a walk-in freezer. Not the ideal human climate. No other doors or windows in here, either.", 
+                "You are in the freezer again."];
 
 //for(var i=0; i<options.length; i++) {
     // if(options[i].innerHTML == 'optionName' || options[i].innerHTML == 'optionName') {
@@ -354,14 +334,7 @@ b.addEventListener("click", () => {
     });
 
 
-
-
-
-
 /////////////////////////////////////////////////////////////////
-
-
-
 
 
 if (currentRm === "storage") {

@@ -36,6 +36,30 @@ var options = ["choose an option...",
                 "close the door", 
                 "leave it open"];
 
+//array of room flavor text. Note: flavor text is stored in this order: darkUnvisited, darkVisited, lightUnvisited, lightVisited.
+var starText = "You are in a room. No doubt you achieved something, maybe not to get here but at some point in your life, so congratulations are in order. The lights, however, seem to be out of order. You can't see a thing.";
+//exception for storage room: there is no unvisited dark option, since you start the game here.
+var stowText = ["Back in the first room. Hmm. Still dark.",
+                "Back in the first room.",
+                "You are in a small storage room. There is a door in front of you and one behind.",
+                "Back in the storage room. Hey, is that mop new? No, never mind, that was there before."];  
+var dineText = [ "It's hard to tell, but this room feels larger than the one you were in before. With your hand on the left wall, you know there is a doorway there. To your right is dark empty space.", 
+                "Back in the larger room.",
+                "You are in what looks like the dining area of a quick-service restaurant. You can see out through the windows that it is dark outside.",
+                "Back in the main dining area."];
+var dinRText = ["You stub your toe on a chair on the way over. Don't worry, that's very rarely fatal. Anyway, you're now at the edge of the room. Stretching out your hands, you feel cold glass. One of the panes is ridged and uneven.",
+                "You return triumphantly to this part of the room. A round of applause does not follow, but you're welcome to imagine it does.\nRecap: Some tables and chairs. Window. Crack.",
+                "On the right side, you find more tables and chairs. Nice!\nAlso, you notice one of the windows has a crack in it. It is poorly patched with duct tape.",
+                "You return triumphantly to this part of the room. A round of applause does not follow, but you're welcome to imagine it does.\nRecap: Some tables and chairs. Window. Crack."];
+var kitText = ["You can't see anything, but you can certainly smell this room. It's vaguely like a room that's been continuously coated in french fry grease for several years. There is a faint shuffling noise deeper into the room.",
+                "Back in the stinky room. You can go back or left.",
+                "You enter what looks like a kitchen. There is a counter running along one side, a soda machine in the corner, and a heavy metal door hanging ajar on the left.\nYou can hear a strange shuffling coming from a garbage can against the wall. Looking over, you can see the can shaking like there is something inside.",
+                "It really smells like french fries in here, yet none are in sight. Tease."];
+var frezText = ["It's extremely chilly in here. You must have forgotten your parka. And your night-vision goggles.", 
+                "Here again. Leaving the door open helped with the chill.", 
+                "You find yourself in a walk-in freezer. Not the ideal human climate. No other doors or windows in here, either.", 
+                "You are in the freezer again."];
+
 var currentRm = rooms[0];
 
 //the only div
@@ -138,7 +162,7 @@ hammer.textContent = items[3];
 var iceBurgs = document.createElement("option");
 iceBurgs.textContent = items[4];
 
-//function to clear the options from select box except first "choose an option..."
+//function to clear the options from select box except first "choose an option... Also clears any extra text from Items zone."
 function clearDiv() {
     while (s.options.length > 1) {
         s.remove(1);
@@ -164,17 +188,19 @@ function clearItems() {
         iceBurgs.parentNode.removeChild(iceBurgs);
     }
 }
+
+//ensures no item icons remain if you restart
 function clearIcons() {
     document.querySelector("img").style.display = "none";
 }
+
 //functions attached to options 
 function start() {
     currentRm = rooms[1];
     newDiv.id = "storage";
     title.textContent = "Start"; 
-    flavText.textContent = "You are in a room. No doubt you achieved something, maybe not to get here but at some point in your life, so congratulations are in order. The lights, however, seem to be out of order. You can't see a thing.";
+    flavText.textContent = starText;
     document.getElementById("choices").appendChild(opt1); 
-    document.getElementById("choices").appendChild(opt2);
     document.getElementById("choices").appendChild(opt4);
 }
 
@@ -187,11 +213,11 @@ function moveF() {
         document.getElementById("choices").appendChild(opt2);
         if (!lightsOn) {
             title.textContent = "You enter the next room.";
-            flavText.textContent = "It's hard to tell, but this room feels larger than the one you were in before. With your hand on the left wall, you know there is a doorway there. To your right is dark empty space.";                     
+            flavText.textContent = dineText[0];
         }
         else {            
             title.textContent = "Dining Room";
-            flavText.textContent = "You enter a larger room. There is a doorway to your left, and more space off to the right.";
+            flavText.textContent = dineText[2];
             opt1.textContent = "do something different";
         }      
     }
@@ -201,12 +227,12 @@ function moveF() {
         newDiv.id = currentRm; 
         if (!lightsOn) {
             title.textContent = "Freezer Dark.";
-            flavText.textContent = "Freezer DarkPath flavor text.";
+            flavText.textContent = frezText[0];
             //grant Iceburgs automatically
         }
         else  {
             title.textContent = "Freezer Light";
-            flavText.textContent = "Freezer LightPath flavor text.";
+            flavText.textContent = frezText[2];
         }     
     }
 }
@@ -218,14 +244,14 @@ function moveB() {
         document.getElementById("choices").appendChild(opt2);
         if (!lightsOn) {
             title.textContent = "Kitchen Dark."
-            flavText.textContent = "Kitchen Darkpath flavor text."
+            flavText.textContent = kitText[0];
         }
         else {
             title.textContent = "Kitchen Light";
-            flavText.textContent = "Kitchen LightPath flavor text.";
+            flavText.textContent = kitText[2];
         }
     }
-    else if (currentRm === rooms[4]) {
+    else if (currentRm === rooms[4] || currentRm === rooms[3]) {
         currentRm = rooms[2];
         newDiv.id = currentRm; 
         document.getElementById("choices").appendChild(opt2);
@@ -233,40 +259,25 @@ function moveB() {
         document.getElementById("choices").appendChild(opt7);
         if (!lightsOn) {
             title.textContent = "Dining Dark."
-            flavText.textContent = "Dining Darkpath flavor text."
+            flavText.textContent = dineText[0];
         }
         else {
             title.textContent = "Dining Light";
-            flavText.textContent = "Dining LightPath flavor text.";
+            flavText.textContent = dineText[2];
         }
     }
 
-    else if (currentRm === rooms[3]) {
-        currentRm = rooms[2];
-        newDiv.id = currentRm; 
-        document.getElementById("choices").appendChild(opt2);
-        document.getElementById("choices").appendChild(opt6);
-        document.getElementById("choices").appendChild(opt7);
-        if (!lightsOn) {
-            title.textContent = "Dining Dark."
-            flavText.textContent = "Dining Darkpath flavor text."
-        }
-        else {
-            title.textContent = "Dining Light";
-            flavText.textContent = "Dining LightPath flavor text.";
-        }
-    }
     else if (currentRm === rooms[2]) {
         currentRm = rooms[1];
         newDiv.id = currentRm; 
         document.getElementById("choices").appendChild(opt1);
         if (!lightsOn) {
             title.textContent = "Storage Dark."
-            flavText.textContent = "Storage Darkpath flavor text."
+            flavText.textContent = stowText[0];
         }
         else {
             title.textContent = "Storage Light";
-            flavText.textContent = "storage LightPath flavor text.";
+            flavText.textContent = stowText[2]
             document.getElementById("choices").appendChild(opt5);
         }
         if (!storageSearched) {
@@ -277,11 +288,11 @@ function moveB() {
     else if (currentRm === rooms[1]) {
         if (!lightsOn) {
             title.textContent = "Storage Dark."
-            flavText.textContent = "Storage Darkpath flavor text."
+            flavText.textContent = stowText[0];
         }
         else {
             title.textContent = "Storage Light";
-            flavText.textContent = "storage LightPath flavor text.";
+            flavText.textContent = stowText[2];
             document.getElementById("choices").appendChild(opt5);
         }
         if (!storageSearched) {
@@ -364,12 +375,7 @@ function backDr() {
     if (K1 || K2|| K3) {
         //give option to useItem
         document.getElementById("choices").appendChild(opt3);
-        // document.getElementById("choices").appendChild(opt5);
     }
-    // else {
-    //     //only option is to leave the room "Go forward"
-    //     document.getElementById("choices").appendChild(opt1);
-    // }
 }
 
 function moveR() {
@@ -379,11 +385,11 @@ function moveR() {
     document.getElementById("choices").appendChild(opt2);
     if (!lightsOn) {
         title.textContent = "DiningRight Dark";
-        flavText.textContent = "DiningRight Dark flavor text.";
+        flavText.textContent = dinRText[0];
     }
     else {
         title.textContent = "DiningRight Light";
-        flavText.textContent = "DiningRight light flavor text.";
+        flavText.textContent = dinRText[2];
     }
 
 }
@@ -505,12 +511,12 @@ function useH() {
 
 function useIce() {
     if (currentRm === "diningRight") {
-        title.textContent = "You swing the Iced Bergs at the window.";
+        title.textContent = "You swing the IceBergs at the window.";
         flavText.textContent = "CRASH! The section of window you struck gives way, spraying glass like the world's worst pinata. Cold night air rushes in, and you are able to climb through to the world outside.";
         itemTitle.textContent = "Congratulations! You have successfully escaped. A winner is you :)"
     }
     else {
-        title.textContent = "You swing the Iced Bergs around.";
+        title.textContent = "You swing the IceBergs around.";
         flavText.textContent = "It doesn't seem to help anything. At least you tried.";
         document.getElementById("choices").appendChild(opt2);
     }
@@ -518,13 +524,14 @@ function useIce() {
 
 function closeDoor() {
     title.textContent = "BANG!";
-    flavText.textContent = "LockedIn Ending. Game Over. Select Let's Go to restart.";
+    flavText.textContent = "The door shuts with an ominously final sound. You give it an experimental push. It does not give at all. Worse, you can't seem to find a handle on this side. You have locked yourself in, with no way out.";
     document.getElementById("choices").appendChild(opt10);
+    itemTitle.textContent = "GAME OVER";
+    itemText.textContent = "Select Let's Go to restart."
 }
 
 function doorOpen() {
     title.textContent = "You leave the door open.";
-    flavText.textContent = "Some of the cold gets out, but otherwise nothing happens.";
     document.getElementById("choices").appendChild(opt2);
     if(lightsOn) {
         flavText.textContent = "Some of the cold gets out, but otherwise nothing happens.";
@@ -534,7 +541,7 @@ function doorOpen() {
         flavText.textContent = "You leave the door open. The shuffling continues. Unnerved, you reach forward in the dark, grabbing the first thing you can reach. It's extremely cold to the touch.";
         imgFive.style.display = "inline";
         I = true;
-        itemTitle.textContent = "Item Discovered: Iced Burgs";
+        itemTitle.textContent = "Item Discovered: IceBurgs";
         itemText.textContent = "A stack of hamburger patties, frozer into a solid cylinder of beef.";
     }
 }
