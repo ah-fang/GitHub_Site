@@ -217,7 +217,6 @@ function moveF() {
     else {            
         title.textContent = "Dining Room";
         flavText.textContent = dineText[2];
-        opt1.textContent = "do something different";
     }      
 
     //add the conditionals for when diningV === true
@@ -496,15 +495,15 @@ function useK3() {
         flavText.textContent = "It has no effect.";
     }
 }
-
+ 
 function useH() {
     if (currentRm === "storage") {
         title.textContent = ".";
         flavText.textContent = ".";
     }
     if (currentRm === "kitchen") {
-        title.textContent = ".";
-        flavText.textContent = ".";
+        title.textContent = "You use the Hammer.";
+        flavText.textContent = "You swing it around like a loose door(utterly unhinged). The captivity must really be getting to you.";
     }
 }
 
@@ -547,90 +546,91 @@ function doorOpen() {
 
 //the Go button's destinations 
 goBtn.addEventListener("click", () => {
-    if (s.value === options[1]) {
-        clearDiv();
-        moveF();
-        console.log("I moved forward");
-    }
-    if (s.value === options[2]) {
-        clearDiv();
-        moveB();
-        console.log("I moved back");
-    }
-    if (s.value === options[3]) {
-        useItem();
-        //no ClearDiv here
-        console.log("Let's use an item, shall we?");
-    }
-    if (s.value === options[4]) {
-        clearDiv();
-        search();
-        console.log("I cased the place");
-    }
-    if (s.value === options[5]) {
-        backDr();
-        console.log("I'm checking in the back");
-    }
-    if (s.value === options[6]) {
-        clearDiv();
-        moveR();
-        console.log("I moved right");
-    }
-    if (s.value === options[7]) {
-        clearDiv();
-        moveL();
-        console.log("I moved left");
-    }
-    if (s.value === options[8]) {
-        clearDiv();
-        attack();
-        console.log("ATTACK");
-    }
-    if (s.value === options[9]) {
-        clearDiv();
-        examine();
-        console.log("I got a closer look");
-    }
-    if (s.value === options[10]) {
-        clearDiv();
-        clearIcons();
-        start();
-        console.log("I ran the start function");
-    }
-    if (s.value === options[11]) {
-        clearDiv();
-        closeDoor();
-        console.log("I made a mistake");
-    }
-    if (s.value === options[12]) {
-        clearDiv();
-        doorOpen();
-        console.log("I like the breeze");
-    }
-    if (s.value === items[0]) {
-        clearItems();
-        useK1();
-        console.log("I tried the first key");
-    }
-    if (s.value === items[1]) {
-        clearItems();
-        useK2();
-        console.log("I tried the second key");
-    }
-    if (s.value === items[2]) {
-        clearItems();
-        useK3();
-        console.log("I tried the third key");
-    }
-    if (s.value === items[3]) {
-        clearItems();
-        useH();
-        console.log("I tried the hammer");
-    }
-    if (s.value === items[4]) {
-        clearItems();
-        useIce();
-        console.log("I tried the third key");
+    switch(s.value) {
+        case options[1]:
+            clearDiv();
+            moveF();
+            console.log("I moved forward");
+            break;
+        case options[2]:
+            clearDiv();
+            moveB();
+            console.log("I moved back");
+            break;
+        case options[3]:
+            useItem();
+            console.log("Let's use an item, shall we?");
+            break;
+        case options[4]:
+            clearDiv();
+            search();
+            console.log("I cased the place");
+            break;
+        case options[5]:
+            backDr();
+            console.log("I'm checking in the back");
+            break;
+        case options[6]:
+            clearDiv();
+            moveR();
+            console.log("I moved right");
+            break;
+        case options[7]:
+            clearDiv();
+            moveL();
+            console.log("I moved left");
+            break;
+        case options[8]:
+            clearDiv();
+            attack();
+            console.log("ATTACK");
+            break;
+        case options[9]:
+            clearDiv();
+            examine();
+            console.log("I got a closer look");
+            break;
+        case options[10]:
+            clearDiv();
+            clearIcons();
+            start();
+            console.log("I ran the start function");
+            break;
+        case options[11]:
+            clearDiv();
+            closeDoor();
+            console.log("I made a mistake");
+            break;
+        case options[12]:
+            clearDiv();
+            doorOpen();
+            console.log("I like the breeze");
+            break;
+        case items[0]:
+            clearItems();
+            useK1();
+            console.log("I tried the first key");
+            break;
+        case items[1]:
+            clearItems();
+            useK2();
+            console.log("I tried the second key");
+            break;
+        case items[2]:
+            clearItems();
+            useK3();
+            console.log("I tried the third key");
+            break;
+        case items[3]:
+            clearItems();
+            useH();
+            console.log("I tried the hammer");
+            break;
+        case items[4]:
+            clearItems();
+            useIce();
+            console.log("I tried the Iceburgs");
+            break;           
     }
     console.log(currentRm);
 });
