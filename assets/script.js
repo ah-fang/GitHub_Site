@@ -485,30 +485,32 @@ function useK2() {
 }
 
 function useK3() {
-    if (currentRm === "storage") {
+    if (currentRm === rooms[1]) {
         title.textContent = "You try the third key.";
         flavText.textContent = "It slots into the lock, and the handle turns. You step through and find yourself outside.";
         //add some win text
     }
-    if (currentRm === "kitchen") {
+    if (currentRm === rooms[4]) {
         title.textContent = "You try the third key.";
         flavText.textContent = "It has no effect.";
     }
 }
  
 function useH() {
-    if (currentRm === "storage") {
+    if (currentRm === rooms[1]) {
         title.textContent = ".";
-        flavText.textContent = ".";
+        flavText.textContent = "You swing it around like a loose door(utterly unhinged). The captivity must really be getting to you..";
+
     }
-    if (currentRm === "kitchen") {
+    else if (currentRm === rooms[4]) {
         title.textContent = "You use the Hammer.";
-        flavText.textContent = "You swing it around like a loose door(utterly unhinged). The captivity must really be getting to you.";
+        flavText.textContent = "";
+        escaped();
     }
 }
 
 function useIce() {
-    if (currentRm === "diningRight") {
+    if (currentRm === rooms[3]) {
         title.textContent = "You swing the IceBergs at the window.";
         flavText.textContent = "CRASH! The section of window you struck gives way, spraying glass like the world's worst pinata. Cold night air rushes in, and you are able to climb through to the world outside.";
         itemTitle.textContent = "Congratulations! You have successfully escaped. A winner is you :)"
@@ -544,6 +546,11 @@ function doorOpen() {
     }
 }
 
+function escaped() {
+    clearItems();
+    itemTitle.textContent = "You Win!"
+    itemText.textContent = "You have successfully escaped! We knew you could do it.\nIf you'd like to play again, select 'let's go'."
+}
 //the Go button's destinations 
 goBtn.addEventListener("click", () => {
     switch(s.value) {
